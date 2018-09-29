@@ -1,5 +1,10 @@
 public class LowestCommonAncestor 
 {
+	Node root;
+	Node findLowestCommonAncestor(int n1, int n2) 
+	{
+		return findLowestCommonAncestor(root,n1,n2);
+	}
 	Node findLowestCommonAncestor(Node n, int n1, int n2) 
 	{
 		if(n==null) return null; //returns null if tree is empty
