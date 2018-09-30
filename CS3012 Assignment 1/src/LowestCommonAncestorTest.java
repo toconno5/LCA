@@ -81,16 +81,4 @@ class LowestCommonAncestorTest
 		tree.root.left.left=new Node(4);
 		assertEquals("Find LCA",tree.root.left,tree.findLowestCommonAncestor(2, 4));
 	}
-	
-	@Test
-	void testWithMissingNodes()
-	{
-		tree.root = new Node(1);
-		tree.root.left=new Node(3);
-		tree.root.right = new Node(6);
-		tree.root.left.left=new Node(10);
-		tree.root.right.left=new Node(12);
-		assertEquals("Find LCA",tree.root.right,tree.findLowestCommonAncestor(6,10));
-	}
-
 }

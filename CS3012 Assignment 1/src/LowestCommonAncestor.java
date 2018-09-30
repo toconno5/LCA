@@ -13,11 +13,13 @@ public class LowestCommonAncestor
 		{
 			return null; //returns null if tree is empty
 		}
-		if(!numsPresent(root, n1) || !numsPresent(root, n2)) { //if one of the nodes isn't present, return null.
-			return null;
+		if(!numsPresent(root, n1) || !numsPresent(root, n2)) 
+		{ 
+			return null; //if one of the nodes isn't present, return null.
 		}
-		if (node.nodeNumber == n1 || node.nodeNumber == n2) { //checks if one of the numbers is equal to the node's value.
-			return node;
+		if (node.nodeNumber == n1 || node.nodeNumber == n2) 
+		{ 
+			return node; //checks if one of the numbers is equal to the node's value.
 		}
 		Node leftNode = findLowestCommonAncestor(node.left,n1,n2); //checks if there nodes in left subtree
 		Node rightNode = findLowestCommonAncestor(node.right,n1,n2); //checks if there are nodes in right subtree
