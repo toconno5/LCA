@@ -1,5 +1,3 @@
-import static org.junit.Assert.assertEquals;
-
 public class LowestCommonAncestor 
 {
 	Node root;
@@ -13,7 +11,7 @@ public class LowestCommonAncestor
 		{
 			return null; //returns null if tree is empty
 		}
-		if(!numsPresent(root, n1) || !numsPresent(root, n2)) 
+		if(!nodesPresent(root, n1) || !nodesPresent(root, n2)) 
 		{ 
 			return null; //if one of the nodes isn't present, return null.
 		}
@@ -27,19 +25,19 @@ public class LowestCommonAncestor
 		{
 			return node;
 		}
-		if(leftNode!=null) 
+		if(leftNode!=null) //if the left subtree is not empty, return it 
 		{
 			return leftNode;
 		}
-		else return rightNode;
+		else return rightNode; //otherwise return the right subtree
 	}
-	public boolean numsPresent (Node node, int num) //check to see if a node is present in the tree.
+	public boolean nodesPresent (Node node, int num) //check to see if a node is present in the tree.
 	{ 
 		
-		if (node == null) return false;
-		if (node.nodeNumber == num) return true;
-		if (numsPresent(node.left, num)) return true;
-		if (numsPresent(node.right, num)) return true;
+		if (node == null) return false; //checks if desired node is null
+		if (node.nodeNumber == num) return true; //checks if desired node is the current node 
+		if (nodesPresent(node.left, num)) return true; //checks left subtree
+		if (nodesPresent(node.right, num)) return true; //checks right subtree
 		
 		return false;
 	}
