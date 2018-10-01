@@ -33,12 +33,10 @@ public class LowestCommonAncestor
 	}
 	public boolean nodesPresent (Node node, int num) //check to see if a node is present in the tree.
 	{ 
-		
 		if (node == null) return false; //checks if desired node is null
 		if (node.nodeNumber == num) return true; //checks if desired node is the current node 
 		if (nodesPresent(node.left, num)) return true; //checks left subtree
 		if (nodesPresent(node.right, num)) return true; //checks right subtree
-		
 		return false;
 	}
 }
