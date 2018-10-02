@@ -67,7 +67,7 @@ class LowestCommonAncestorTest
 		tree.root.right=new Node(3);
 		tree.root.left.left = new Node(4);
 		tree.root.left.right= new Node (5);
-		assertEquals("LCA for one non existent nodes",null,tree.findLowestCommonAncestor(3, 10));
+		assertEquals("LCA for one non existent node",null,tree.findLowestCommonAncestor(3, 10));
 		assertEquals("LCA for two non existent nodes",null,tree.findLowestCommonAncestor(6, 10));
 		assertEquals("LCA for two common non existent nodes",null,tree.findLowestCommonAncestor(6, 10));
 	}
