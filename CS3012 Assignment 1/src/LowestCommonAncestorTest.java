@@ -1,24 +1,29 @@
+/*
+ *
+ *  @author Tiernan O'Connor (toconno5)
+ *  @dateOfSubmission 2/10/18
+ *
+*/
 import static org.junit.Assert.*;
 import org.junit.jupiter.api.Test;
-
 class LowestCommonAncestorTest 
 {
 	LowestCommonAncestor tree = new LowestCommonAncestor();
 	@Test
-	void testWhenTreeIsNull() 
+	void testWhenTreeIsNull()  //tests an empty or null tree
 	{
 		assertEquals("Find LCA when tree is empty: ",null,tree.findLowestCommonAncestor(1, 2));
 	}
 	
 	@Test 
-	void testOneNodeTree()
+	void testOneNodeTree() //tests a tree that has only one node
 	{
 		tree.root = new Node(1);
 		assertEquals("Find LCA when tree is one node: ",null,tree.findLowestCommonAncestor(1, 2));
 	}
 	
 	@Test 
-	void testTwoNodeTree() 
+	void testTwoNodeTree()  //tests a tree with only two nodes
 	{
 		tree.root=new Node(1);
 		tree.root.left=new Node(2);
@@ -26,7 +31,7 @@ class LowestCommonAncestorTest
 	}
 	
 	@Test 
-	void testWhenTwoNodesAreSame()
+	void testWhenTwoNodesAreSame()//tests a tree when asked for LCA of two nodes that are the same
 	{
 		tree.root=new Node(1);
 		tree.root.left=new Node(2);
@@ -35,7 +40,7 @@ class LowestCommonAncestorTest
 	}
 	
 	@Test 
-	void testCorrectNodeIsChosen()
+	void testCorrectNodeIsChosen()//tests a tree of size 12 for correct LCA obtainment
 	{
 		tree.root = new Node(1);
 		tree.root.left=new Node(2);
@@ -60,7 +65,7 @@ class LowestCommonAncestorTest
 	}
 	
 	@Test
-	void testForNonExistentNodes()
+	void testForNonExistentNodes()//tests for asked to find lowest common ancestor for nodes that don't exist in the binary tree
 	{
 		tree.root = new Node(1);
 		tree.root.left=new Node(2);
@@ -73,7 +78,7 @@ class LowestCommonAncestorTest
 	}
 	
 	@Test
-	void testForAncestors()
+	void testForAncestors() //tests for when one node is a direct ancestor of the other node
 	{
 		tree.root = new Node(1);
 		tree.root.left=new Node(2);
@@ -83,7 +88,7 @@ class LowestCommonAncestorTest
 	}
 	
 	@Test 
-	void testOneSidedTree() 
+	void testOneSidedTree() //tests a tree that is a straight line i.e. each node is an ancestor of the previous node.
 	{
 		tree.root= new Node(1);
 		tree.root.left = new Node (2);
