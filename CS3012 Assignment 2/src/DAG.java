@@ -22,32 +22,33 @@ public class DAG
 	List<Integer> Node1Path = new ArrayList<>();
 	List<Integer> Node2Path = new ArrayList<>();
 
-	int findLowestCommonAncestor(Node node, int n1, int n2) 
+	int LowestCommonAncestorFunctionDAG (Node n1, Node n2)
 	{
-		if(node==null) 
-		{
-			return null; //returns null if tree is empty
-		}
-		if(!nodesPresent(root, n1) || !nodesPresent(root, n2)) 
-		{ 
-			return null; //if one of the nodes isn't present, return null.
-		}
-		if (node.nodeNumber == n1 || node.nodeNumber == n2) 
-		{ 
-			return node; //checks if one of the numbers is equal to the node's value.
-		}
-		Node leftNode = findLowestCommonAncestor(node.left,n1,n2); //checks if there nodes in left subtree
-		Node rightNode = findLowestCommonAncestor(node.right,n1,n2); //checks if there are nodes in right subtree
-		if(leftNode!=null && rightNode!=null) 
-		{
-			return node;
-		}
-		if(leftNode!=null) //if the left subtree is not empty, return it 
-		{
-			return leftNode;
-		}
-		else return rightNode; //otherwise return the right subtree
+		return findLowestCommonAncestor(root, n1, n2);
 	}
+	
+	int findLowestCommonAncestor(Node node, Node n1, Node n2) 
+	{
+		if(n1!=null && n2!=null) 
+		{
+			if(n1.ancestors!=null && n2.ancestors!=null) 
+			{
+				for(int i=0; i<n2.ancestors.size(); i++) 
+				{
+					for(int j=0; j<node.ancestors.size(); j++) 
+					{
+						if(n2.ancestors.get(i)==n1.ancestors.get(j)) 
+						{
+							return n2.ancestors.get(i).nodeNumber;
+						}
+					}
+				}
+			}
+			else return root.nodeNumber;
+		}
+		return 0; //returns null if tree is empty
+	}
+	
 	public boolean nodesPresent (Node root, int num, List<Integer> path) //check to see if a node is present in the tree.
 	{ 
 		if (root == null) return false; //checks if desired node is null
