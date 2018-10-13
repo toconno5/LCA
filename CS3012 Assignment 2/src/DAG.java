@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class DAG 
 {
 	Node root;
@@ -46,10 +48,12 @@ class Node
 	int nodeNumber;
 	Node left;
 	Node right;
-	public Node(int value)
+	ArrayList<Node> ancestors;
+	Node(int value)
 	{
 		nodeNumber=value;
 		left = null;
 		right = null;
+		ancestors=null;
 	}
 }
