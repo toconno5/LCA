@@ -1,13 +1,28 @@
 import java.util.ArrayList;
+import java.util.List;
+
+class Node
+{
+	int nodeNumber;
+	Node left;
+	Node right;
+	ArrayList<Node> ancestors;
+	Node(int value)
+	{
+		nodeNumber=value;
+		left = null;
+		right = null;
+		ancestors=null;
+	}
+}
 
 public class DAG 
 {
 	Node root;
-	Node findLowestCommonAncestor(int n1, int n2) 
-	{
-		return findLowestCommonAncestor(root,n1,n2);
-	}
-	Node findLowestCommonAncestor(Node node, int n1, int n2) 
+	List<Integer> Node1Path = new ArrayList<>();
+	List<Integer> Node2Path = new ArrayList<>();
+
+	int findLowestCommonAncestor(Node node, int n1, int n2) 
 	{
 		if(node==null) 
 		{
@@ -33,27 +48,14 @@ public class DAG
 		}
 		else return rightNode; //otherwise return the right subtree
 	}
-	public boolean nodesPresent (Node node, int num) //check to see if a node is present in the tree.
+	public boolean nodesPresent (Node root, int num, List<Integer> path) //check to see if a node is present in the tree.
 	{ 
-		if (node == null) return false; //checks if desired node is null
-		if (node.nodeNumber == num) return true; //checks if desired node is the current node 
-		if (nodesPresent(node.left, num)) return true; //checks left subtree
-		if (nodesPresent(node.right, num)) return true; //checks right subtree
+		if (root == null) return false; //checks if desired node is null
+		path.add(root.nodeNumber);
+		if (root.nodeNumber == num) return true; //checks if desired node is the current node 
+		if (root.left!=null && nodesPresent(root.left, num, path)) return true; //checks left subtree
+		if (root.right!=null && nodesPresent(root.right, num, path)) return true; //checks right subtree
+		path.remove(path.size()-1);
 		return false;
-	}
-}
-
-class Node
-{
-	int nodeNumber;
-	Node left;
-	Node right;
-	ArrayList<Node> ancestors;
-	Node(int value)
-	{
-		nodeNumber=value;
-		left = null;
-		right = null;
-		ancestors=null;
 	}
 }
