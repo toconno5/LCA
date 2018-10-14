@@ -19,15 +19,15 @@ class Node
 public class DAG 
 {
 	Node root;
-	List<Integer> Node1Path = new ArrayList<>();
-	List<Integer> Node2Path = new ArrayList<>();
-
-	int LowestCommonAncestorFunctionDAG (Node n1, Node n2)
+	List<Integer> n1Path = new ArrayList<>();
+	List<Integer> n2Path = new ArrayList<>();
+	
+	int LowestCommonAncestorDAG (Node n1, Node n2)
 	{
-		return findLowestCommonAncestor(root, n1, n2);
+		return findLowestCommonAncestorDAG(root, n1, n2);
 	}
 	
-	int findLowestCommonAncestor(Node node, Node n1, Node n2) 
+	int findLowestCommonAncestorDAG(Node node, Node n1, Node n2) 
 	{
 		if(n1!=null && n2!=null) 
 		{
@@ -58,5 +58,33 @@ public class DAG
 		if (root.right!=null && nodesPresent(root.right, num, path)) return true; //checks right subtree
 		path.remove(path.size()-1);
 		return false;
+	}
+	
+	public void addToGraph(Node n1)
+	{
+		n1.ancestors = new ArrayList <Node> ();
+		n1.ancestors.add(n1);
+		
+	}
+	
+	public void addAncestorsToNode(Node n1, Node n2)
+	{
+		for (int i=0; i < n1.ancestors.size(); i++)
+		{
+			if(!n2.ancestors.contains(n1.ancestors.get(i)))
+			{
+				n2.ancestors.add(n1.ancestors.get(i));
+			}
+		}
+	}
+	public void addAncestorsToNodeAtPosition(int pos, Node n1, Node n2)
+	{
+		for (int i=0; i < n1.ancestors.size(); i++)
+		{
+			if(!n2.ancestors.contains(n1.ancestors.get(i)))
+			{
+				n2.ancestors.add(pos, n1.ancestors.get(i));
+			}
+		}
 	}
 }
