@@ -21,12 +21,12 @@ public class DAG
 	List<Integer> n1Path = new ArrayList<>(); //creates list for node 1's path
 	List<Integer> n2Path = new ArrayList<>(); // creates list for node 2's path
 	
-	int LowestCommonAncestorDAG (Node n1, Node n2) //function for lowest common ancestor in DAG
+	public int LowestCommonAncestorDAG (Node n1, Node n2) //function for lowest common ancestor in DAG
 	{
 		return findLowestCommonAncestorDAG(root, n1, n2);
 	}
 	
-	int findLowestCommonAncestorDAG(Node node, Node n1, Node n2)  //function to find lowest common ancestor 
+	public int findLowestCommonAncestorDAG(Node node, Node n1, Node n2)  //function to find lowest common ancestor 
 	{
 		if(n1!=null && n2!=null) //returns 0 if n1 or n2 are null
 		{
@@ -85,5 +85,44 @@ public class DAG
 				n2.ancestors.add(pos, n1.ancestors.get(i)); //add it in correct position
 			}
 		}
+	}
+	public int LowestCommonAncestorBST (int n1, int n2)
+	{
+		n1Path.clear(); //clears path of ancestors for node 1
+		n2Path.clear(); //clears path of ancestors for node 2
+		return findLowestCommonAncestorBST(root, n1, n2); //calls on function to find LCA for two desired nodes
+	}
+
+	public int findLowestCommonAncestorBST(Node root, int n1, int n2)
+	{
+		int i;
+		for (i = 0; i < n1Path.size() && i < n2Path.size(); i++) //for loop that loops through n1's and n2's path of ancestors
+		{
+			if (!n2Path.get(i).equals(n2Path.get(i))) //if ancestors don't match
+			{
+				break;
+			}
+		}
+		if (!nodesPresent(root, n1, n1Path) || !nodesPresent(root, n2, n2Path))  //checks if nodes aren't in paths
+		{
+			if(n1Path.size() == 0 && n2Path.size() == 0) //if neither nodes are in the tree
+			{
+				if(n1Path.contains(n1) && n2Path.contains(n2)) //checks if the tree is empty
+				{
+					System.out.println("Tree is empty."); 
+				}
+				else	 System.out.println("The chosen nodes are not part of the binary tree"); //the specified nodes are not in the binary tree as their paths don't exist
+			}
+			if (n2Path.size() > 0 && n1Path.size() == 0) //checks if node 1 is not in binary tree
+			{
+				System.out.println("Node 1 is not in the binary tree");
+			}
+			if (n1Path.size() > 0 && n2Path.size() == 0) //checks if node 2 is not in binary tree
+			{
+				System.out.println("Node 2 is not in the binary tree");
+			}
+			else return -1; //if so returns -1
+		}
+		return n1Path.get(i - 1); //returns previous ancestor
 	}
 }
