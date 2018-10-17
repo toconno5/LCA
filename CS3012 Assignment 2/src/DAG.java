@@ -95,14 +95,6 @@ public class DAG
 
 	public int findLowestCommonAncestorBST(Node root, int n1, int n2)
 	{
-		int i;
-		for (i = 0; i < n1Path.size() && i < n2Path.size(); i++) //for loop that loops through n1's and n2's path of ancestors
-		{
-			if (!n2Path.get(i).equals(n2Path.get(i))) //if ancestors don't match
-			{
-				break;
-			}
-		}
 		if (!nodesPresent(root, n1, n1Path) || !nodesPresent(root, n2, n2Path))  //checks if nodes aren't in paths
 		{
 			if(n1Path.size() == 0 && n2Path.size() == 0) //if neither nodes are in the tree
@@ -113,15 +105,24 @@ public class DAG
 				}
 				else	 System.out.println("The tree is empty"); //the specified nodes are not in the binary tree as their paths don't exist
 			}
-			if (n2Path.size() > 0 && n1Path.size() == 0) //checks if node 1 is not in binary tree
-			{
-				System.out.println("Node 1 is not in the binary tree");
-			}
 			if (n1Path.size() > 0 && n2Path.size() == 0) //checks if node 2 is not in binary tree
 			{
 				System.out.println("Node 2 is not in the binary tree");
 			}
-			else return -1; //if so returns -1
+			if (n2Path.size() > 0 && n1Path.size() == 0) //checks if node 1 is not in binary tree
+			{
+				System.out.println("Node 1 is not in the binary tree");
+			}
+			return -1; //if so returns -1
+		}
+		
+		int i;
+		for (i = 0; i < n1Path.size() && i < n2Path.size(); i++) //for loop that loops through n1's and n2's path of ancestors
+		{
+			if (!n1Path.get(i).equals(n2Path.get(i))) //if ancestors don't match
+			{
+				break;
+			}
 		}
 		return n1Path.get(i - 1); //returns previous ancestor
 	}
