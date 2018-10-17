@@ -4,10 +4,11 @@ import org.junit.Test;
 
 public class DAGTest 
 {
+
 	DAG binaryTree = new DAG();
 	@Test
-	public void testSizeEmpty() 
+	public void testEmptyTree() 
 	{
-		assertEquals("LCA of empty tree", -1, binaryTree.LowestCommonAncestorBST(0, 0));
+		assertEquals("LCA of Empty tree", -1, binaryTree.LowestCommonAncestorBST(0, 0));
 	}
 }
