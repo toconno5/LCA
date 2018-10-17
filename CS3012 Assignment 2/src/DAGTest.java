@@ -7,13 +7,13 @@ public class DAGTest
 	DAG binaryTree = new DAG();
 	
 	@Test
-	public void testEmptyTree() 
+	public void testEmptyTree() //tests a null tree
 	{
 		assertEquals("LCA of Empty tree", -1, binaryTree.LowestCommonAncestorBST(0, 0));
 	}
 	
 	@Test
-	public void testOneNodeTree() 
+	public void testOneNodeTree() //tests a tree with only one node
 	{
 		binaryTree.root = new Node(1);
 		assertEquals("LCA of one node tree", -1, binaryTree.LowestCommonAncestorBST(1, 0));
