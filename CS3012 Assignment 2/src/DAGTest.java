@@ -2,11 +2,12 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class DAGTest {
-
+public class DAGTest 
+{
+	DAG binaryTree = new DAG();
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testSizeEmpty() 
+	{
+		assertEquals("LCA of empty tree", -1, binaryTree.LowestCommonAncestorBST(0, 0));
 	}
-
 }

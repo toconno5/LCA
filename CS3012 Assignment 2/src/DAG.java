@@ -9,6 +9,7 @@ class Node
 	Node(int value)
 	{
 		nodeNumber=value;
+		left=right;
 		left = null;
 		right = null;
 		ancestors=null;
@@ -26,7 +27,7 @@ public class DAG
 		return findLowestCommonAncestorDAG(root, n1, n2);
 	}
 	
-	public int findLowestCommonAncestorDAG(Node node, Node n1, Node n2)  //function to find lowest common ancestor 
+	public int findLowestCommonAncestorDAG(Node root, Node n1, Node n2)  //function to find lowest common ancestor 
 	{
 		if(n1!=null && n2!=null) //returns 0 if n1 or n2 are null
 		{
@@ -34,7 +35,7 @@ public class DAG
 			{
 				for(int i=0; i<n2.ancestors.size(); i++) //loops through number of ancestors of n2
 				{
-					for(int j=0; j<node.ancestors.size(); j++) //loops through selected nodes ancestors
+					for(int j=0; j<n1.ancestors.size(); j++) //loops through selected nodes ancestors
 					{
 						if(n2.ancestors.get(i)==n1.ancestors.get(j)) //checks if n1 or n2 share ancestors
 						{
@@ -63,7 +64,6 @@ public class DAG
 	{
 		n1.ancestors = new ArrayList <Node> (); //creates an array list to stores ancestors for node 1
 		n1.ancestors.add(n1); //adds node 1 to the list of ancestors for itself
-		
 	}
 	
 	public void addAncestorsToNode(Node n1, Node n2) 
@@ -107,11 +107,11 @@ public class DAG
 		{
 			if(n1Path.size() == 0 && n2Path.size() == 0) //if neither nodes are in the tree
 			{
-				if(n1Path.contains(n1) && n2Path.contains(n2)) //checks if the tree is empty
+				if(!n1Path.contains(n1) && !n2Path.contains(n2)) //checks if the tree is empty
 				{
-					System.out.println("Tree is empty."); 
+					System.out.println("Chosen nodes do not exist."); 
 				}
-				else	 System.out.println("The chosen nodes are not part of the binary tree"); //the specified nodes are not in the binary tree as their paths don't exist
+				else	 System.out.println("The tree is empty"); //the specified nodes are not in the binary tree as their paths don't exist
 			}
 			if (n2Path.size() > 0 && n1Path.size() == 0) //checks if node 1 is not in binary tree
 			{
