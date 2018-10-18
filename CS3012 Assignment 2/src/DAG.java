@@ -44,7 +44,7 @@ public class DAG
 					}
 				}
 			}
-			else return root.nodeNumber; 
+//			else return root.nodeNumber; 
 		}
 		return 0;
 	}
@@ -101,17 +101,13 @@ public class DAG
 			{
 				if(!n1Path.contains(n1) && !n2Path.contains(n2)) //checks if the tree is empty
 				{
-					System.out.println("Chosen nodes do not exist."); 
+					System.out.println("Node 1 is not in the binary tree"); 
 				}
-				else	 System.out.println("The tree is empty"); //the specified nodes are not in the binary tree as their paths don't exist
+//				else	 System.out.println("The tree is empty"); //the specified nodes are not in the binary tree as their paths don't exist
 			}
 			if (n1Path.size() > 0 && n2Path.size() == 0) //checks if node 2 is not in binary tree
 			{
 				System.out.println("Node 2 is not in the binary tree");
-			}
-			if (n2Path.size() > 0 && n1Path.size() == 0) //checks if node 1 is not in binary tree
-			{
-				System.out.println("Node 1 is not in the binary tree");
 			}
 			return -1; //if so returns -1
 		}

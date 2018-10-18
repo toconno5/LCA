@@ -1,5 +1,4 @@
 import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 public class DAGTest 
@@ -34,6 +33,17 @@ public class DAGTest
 		binaryTree.root.left=new Node(2);
 		binaryTree.root.right=new Node(3);
 		assertEquals("Find LCA when two entered nodes are the same",3,binaryTree.LowestCommonAncestorBST(3, 3));
+	}
+	
+	@Test 
+	public void testWhenNodesNotInTree()  //tests a tree with only two nodes
+	{
+		binaryTree.root=new Node(1);
+		binaryTree.root.left=new Node(2);
+		binaryTree.root.right=new Node(3);
+		assertEquals("Find LCA when first node not in tree ", -1, binaryTree.LowestCommonAncestorBST(4, 2));
+		assertEquals("Find LCA when second node not in tree ", -1, binaryTree.LowestCommonAncestorBST(1, 5));
+		assertEquals("Find LCA when both nodes not in tree ", -1, binaryTree.LowestCommonAncestorBST(4, 5));
 	}
 
 	@Test
@@ -112,5 +122,94 @@ public class DAGTest
 		assertEquals("Find LCA for tree out of order", 3, binaryTree.LowestCommonAncestorBST(3, 4));
 		assertEquals("Find LCA for tree out of order", 1, binaryTree.LowestCommonAncestorBST(6, 2));
 		assertEquals("Find LCA for tree out of order", 5, binaryTree.LowestCommonAncestorBST(7, 2));
+	}
+	
+	@Test
+	public void testDAG1() 
+	{
+		DAG DAG1 = new DAG();
+		
+		Node rootNode = new Node(1);
+		Node node2 = new Node(2);
+		Node node3 = new Node(3);
+		Node node4 = new Node(4);
+		Node node5 = new Node(5);
+		Node node6 = new Node(6);
+
+		DAG1.addToGraph(rootNode);
+		DAG1.addToGraph(node2);
+		DAG1.addToGraph(node3);
+		DAG1.addToGraph(node4);
+		DAG1.addToGraph(node5);
+		DAG1.addToGraph(node6);
+
+		DAG1.addAncestorsToNode(rootNode, node2);
+		DAG1.addAncestorsToNode(node2, node3);
+		DAG1.addAncestorsToNode(node2, node4);
+		DAG1.addAncestorsToNode(node3, node5);
+		DAG1.addAncestorsToNode(node5, node6);
+		DAG1.addAncestorsToNodeAtPosition(1, node4, node6);
+
+		assertEquals(5, DAG1.findLowestCommonAncestorDAG(rootNode, node6, node5));
+		assertEquals(4, DAG1.findLowestCommonAncestorDAG(rootNode, node6, node4));
+		assertEquals(3, DAG1.findLowestCommonAncestorDAG(rootNode, node6, node3));
+		assertEquals(2, DAG1.findLowestCommonAncestorDAG(rootNode, node4, node5));
+		assertEquals(2, DAG1.findLowestCommonAncestorDAG(rootNode, node6, node2));
+		assertEquals(1, DAG1.findLowestCommonAncestorDAG(rootNode, node2, rootNode));
+		assertEquals(1, DAG1.findLowestCommonAncestorDAG(rootNode, rootNode, rootNode));
+	}
+
+	@Test
+	public void testDAG2() 
+	{
+		DAG DAG2 = new DAG();
+
+		Node node1 = new Node(1);
+		Node node2 = new Node(2);
+		Node node3 = new Node(3);
+		Node node4 = new Node(4);
+		Node node5 = new Node(5);
+		Node node6 = new Node(6);
+		Node node7 = new Node(7);
+
+		DAG2.addToGraph(node1);
+		DAG2.addToGraph(node2);
+		DAG2.addToGraph(node3);
+		DAG2.addToGraph(node4);
+		DAG2.addToGraph(node5);
+		DAG2.addToGraph(node6);
+		DAG2.addToGraph(node7);
+
+		DAG2.addAncestorsToNode(node6, node5);
+		DAG2.addAncestorsToNode(node3, node2);
+		DAG2.addAncestorsToNode(node4, node2);
+		DAG2.addAncestorsToNode(node5, node3);
+		DAG2.addAncestorsToNode(node5, node4);
+		DAG2.addAncestorsToNode(node5, node2);
+		DAG2.addAncestorsToNode(node2, node1);
+		DAG2.addAncestorsToNode(node4, node7);
+
+		assertEquals(4, DAG2.findLowestCommonAncestorDAG(node6, node1, node7));
+		assertEquals(5, DAG2.findLowestCommonAncestorDAG(node6, node3, node7));
+		assertEquals(6, DAG2.findLowestCommonAncestorDAG(node6, node5, node6));
+		assertEquals(5, DAG2.findLowestCommonAncestorDAG(node6, node3, node4));
+		assertEquals(4, DAG2.findLowestCommonAncestorDAG(node6, node2, node7));
+		assertEquals(2, DAG2.findLowestCommonAncestorDAG(node6, node1, node2));
+		assertEquals(6, DAG2.findLowestCommonAncestorDAG(node6, node6, node6));
+	}
+
+	@Test
+	public void testEmptyGraphDAG() 
+	{
+		DAG DAG3 = new DAG();
+		assertEquals(0, DAG3.findLowestCommonAncestorDAG(null, null, null));
+	}
+
+	@Test
+	public void testGraphOneNodeDAG() {
+		DAG DAG4 = new DAG();
+		Node node1 = new Node(1);
+		DAG4.addToGraph(node1);
+		assertEquals(1, DAG4.findLowestCommonAncestorDAG(node1, node1, node1));
 	}
 }
